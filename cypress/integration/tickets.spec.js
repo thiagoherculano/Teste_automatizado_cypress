@@ -24,11 +24,15 @@ describe("Tickets", () => {
         cy.get("#social-media").check();
     });
 
-    it.only("Seleciona 'friend', e 'publication', depois desmarca o 'friend'", () =>{
+    it("Seleciona 'friend', e 'publication', depois desmarca o 'friend'", () =>{
         cy.get("#friend").check();                               
         cy.get("#publication").check();                           /*Interagindo com checkboxes*/
         cy.get("#friend").uncheck();
     });
 
-    it("has 'TICKETBOX' header's heading", () =>{});
+    it.only("verifica se tem escrito 'TICKETBOX' no header", () =>{
+        cy.get("header h1").should("contain", "TICKETBOX");        /*Realizando vericaçãoes*/
+    });
+
+
 });
