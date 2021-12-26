@@ -1,4 +1,3 @@
-
 describe("Tickets", () => {
     beforeEach(() => cy.visit("https://bit.ly/2XSuwCW")); /*Abre a url do site*/
 
@@ -17,9 +16,19 @@ describe("Tickets", () => {
         cy.get("#ticket-quantity").select("2");   /* Interagindo com elemento do tipo select*/
     });
 
-    it.only("seleciona o ticket 'Vip' do ticket type", () =>{
+    it("seleciona o ticket 'Vip' do ticket type", () =>{
         cy.get("#vip").check();                                   /*Interagindo com radio buttons*/
-    })
+    });
+
+    it("Seleciona o 'social media' no checkbox", () => {
+        cy.get("#social-media").check();
+    });
+
+    it.only("Seleciona 'friend', e 'publication', depois desmarca o 'friend'", () =>{
+        cy.get("#friend").check();                               
+        cy.get("#publication").check();                           /*Interagindo com checkboxes*/
+        cy.get("#friend").uncheck();
+    });
 
     it("has 'TICKETBOX' header's heading", () =>{});
 });
