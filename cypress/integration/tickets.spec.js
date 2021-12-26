@@ -6,16 +6,20 @@ describe("Tickets", () => {
         const primeiroNome = "Thiago";
         const segundoNome = "Herculano";
 
-        cy.get("#first-name").type(primeiroNome);        /*interagindo com elemento do tipo texto*/
+        cy.get("#first-name").type(primeiroNome);        
         cy.get("#last-name").type(segundoNome);
-        cy.get("#email").type("thiagoherculan@gmail.com");
+        cy.get("#email").type("thiagoherculan@gmail.com");    /*interagindo com elemento do tipo texto*/
         cy.get("#requests").type("Vegetarian");
         cy.get("#signature").type(`${primeiroNome} ${segundoNome}`);
     })
 
-    it.only("seleciona 2 tickets", () =>{
+    it("seleciona 2 tickets do ticket quantity", () =>{
         cy.get("#ticket-quantity").select("2");   /* Interagindo com elemento do tipo select*/
     });
+
+    it.only("seleciona o ticket 'Vip' do ticket type", () =>{
+        cy.get("#vip").check();                                   /*Interagindo com radio buttons*/
+    })
 
     it("has 'TICKETBOX' header's heading", () =>{});
 });
