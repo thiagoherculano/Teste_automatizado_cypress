@@ -66,5 +66,16 @@ describe("Tickets", () => {
             "contain",
             `I, ${fullName}, wish to buy 2 VIP tickets.`
         );
+
+        cy.get("#agree").click();
+        cy.get("#signature").type(fullName);
+
+        cy.get("button[type='submit']")
+        .as("submitButton")
+        .should("not.be.disabled");
+
+        cy.get("button[type='reset']").click();
+
+        cy.get("@submitButton").should("be.disabled");
     });
 });
