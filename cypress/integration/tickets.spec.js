@@ -1,3 +1,4 @@
+
 describe("Tickets", () => {
     beforeEach(() => cy.visit("https://bit.ly/2XSuwCW")); /*Abre a url do site*/
 
@@ -30,9 +31,22 @@ describe("Tickets", () => {
         cy.get("#friend").uncheck();
     });
 
-    it.only("verifica se tem escrito 'TICKETBOX' no header", () =>{
+    it("verifica se tem escrito 'TICKETBOX' no header", () =>{
         cy.get("header h1").should("contain", "TICKETBOX");        /*Realizando vericaçãoes*/
     });
 
+    it.only("verifica se o email é invalido", () => {
+        cy.get("#email")
+        .as("email")
+        .type("Thiagoherculan-gmail.com");        
+
+        cy.get("#email.invalid").should("exist");     /* verifica se existe uma classe que avisa que tem email invalido*/
+
+        cy.get("@email")
+        .clear()
+        .type("thiagoherculan@gmail.com");
+
+        cy.get("#email.invalid").should("not.exist");
+    });
 
 });
