@@ -1,4 +1,5 @@
 
+
 describe("Tickets", () => {
     beforeEach(() => cy.visit("https://bit.ly/2XSuwCW")); /*Abre a url do site*/
 
@@ -49,7 +50,7 @@ describe("Tickets", () => {
         cy.get("#email.invalid").should("not.exist");
     });
 
-    it.only("Preenche o formulario depois reseta", () => {
+    it("Preenche o formulario depois reseta", () => {
         const primeiroNome = "Thiago";
         const segundoNome = "Herculano";
         const fullName = `${primeiroNome} ${segundoNome}`;
@@ -75,6 +76,24 @@ describe("Tickets", () => {
         .should("not.be.disabled");
 
         cy.get("button[type='reset']").click();
+
+        cy.get("@submitButton").should("be.disabled");
+    });
+
+    it.only("Preenche os campos obrigatorios e ver se o butão estar habilitado", () =>{
+        const customer = {
+            primeiroNome : "Thiago",
+            segundoNome: "Herculano",
+            email :"thiagoherculan@gmail.com"
+        };
+
+        cy.fillMandatoryFields(customer);
+
+        cy.get("button[type='submit']")
+        .as("submitButton")
+        .should("not.be.disabled");
+
+        cy.get("#agree").uncheck();
 
         cy.get("@submitButton").should("be.disabled");
     });
